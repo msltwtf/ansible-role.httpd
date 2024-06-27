@@ -1,0 +1,16 @@
+{{ ansible_managed }}
+
+<VirtualHost {{ listen_ip | default('*') }}:{{ listen_port }}>
+	ServerName {{ server_name }}
+  {% if server_admin is defined %}}
+	ServerAdmin {{ server_admin }}
+  {% endif %}
+  {% if server_alias is defined %}
+  ServerAlias {{ server_alias }}
+  {% endif %}
+  {% if document_root is defined %}
+	DocumentRoot {{ document_root }}
+  {% endif %}
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
